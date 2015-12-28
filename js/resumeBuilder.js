@@ -121,8 +121,8 @@ function displayBio() {
 
 	if (bio.skills.length > 0) {
 			$("#header").append(HTMLskillsStart);
-			for (skill in bio.skills) {
-				formattedSkills += HTMLskills.replace("%data%", bio.skills[skill]);
+			for (var skill in bio.skills) {
+				formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
 			}
 			$("#skills").append(formattedSkills);
 		}
@@ -137,7 +137,8 @@ function displayBio() {
 
 //Work Experience section
 function displayWork () {
-for (var job in work.jobs){
+for (var job in work.jobs)
+if (work.jobs.hasOwnProperty(job))  {
 	$('#workExperience').append(HTMLworkStart);
 
 	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
@@ -158,7 +159,8 @@ for (var job in work.jobs){
 
 //Projects section
 projects.display = function() {
-	for (var project in projects.projects) {
+	for (var project in projects.projects)
+  if (projects.projects.hasOwnProperty(project)){
 		$('#projects').append(HTMLprojectStart);
 
 		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].title);
@@ -181,7 +183,8 @@ projects.display = function() {
 
 //Education section
 function displayEducation() {
-	for (var school in education.schools) {
+	for (var school in education.schools)
+  if (education.schools.hasOwnProperty(school)) {
 		$('#education').append(HTMLschoolStart);
 
 		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
@@ -203,7 +206,8 @@ function displayEducation() {
 
 function displayOnlineCourse() {
 		$('#education').append(HTMLonlineClasses);
-	for (var onlineCourse in education.onlineCourses) {
+	for (var onlineCourse in education.onlineCourses)
+  if (education.onlineCourses.hasOwnProperty(onlineCourse)){
 		$('#education').append(HTMLschoolStart);
 
 		var formattedTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[onlineCourse].title);
