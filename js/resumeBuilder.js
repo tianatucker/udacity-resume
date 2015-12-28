@@ -23,7 +23,7 @@ var work = {
 			'description': 'Cupcake ipsum dolor. Sit amet powder jujubes sweet roll gummies. Donut topping cotton candy. Topping gummi bears liquorice cotton candy dragée jelly-o chocolate bar jelly beans.'
 		}
 	]
-}
+};
 
 var projects = {
 	'projects': [
@@ -40,7 +40,7 @@ var projects = {
 			'images': ''
 		}
 	]
-}
+};
 
 var bio = {
 	'name': 'Tiana Tucker',
@@ -59,7 +59,7 @@ var bio = {
 	 	'prototyping'
 	],
 	'bioPic': 'images/Tiana_web_circle.jpeg'
-}
+};
 
 var education = {
 	'schools': [
@@ -86,7 +86,7 @@ var education = {
 			'url': 'https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001'
 		},
 	]
-}
+};
 
 //Bio in the header
 function displayBio() {
@@ -119,14 +119,13 @@ function displayBio() {
 
 	$('#header').append(HTMLskillsStart);
 
-	var formattedSkills = HTMLskills.replace('%data%', bio.skills[0]);
-	$('#skills').append(formattedSkills);
-
-	var formattedSkills = HTMLskills.replace('%data%', bio.skills[1]);
-	$('#skills').append(formattedSkills);
-
-	var formattedSkills = HTMLskills.replace('%data%', bio.skills[2]);
-	$('#skills').append(formattedSkills);
+	if (bio.skills.length > 0) {
+			$("#header").append(HTMLskillsStart);
+			for (skill in bio.skills) {
+				formattedSkills += HTMLskills.replace("%data%", bio.skills[skill]);
+			}
+			$("#skills").append(formattedSkills);
+		}
 
 	$('#footerContacts').append(formattedMobile);
 	$('#footerContacts').append(formattedEmail);
@@ -138,7 +137,7 @@ function displayBio() {
 
 //Work Experience section
 function displayWork () {
-for (job in work.jobs){
+for (var job in work.jobs){
 	$('#workExperience').append(HTMLworkStart);
 
 	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
@@ -149,7 +148,7 @@ for (job in work.jobs){
 	var formattedDates = HTMLworkDates.replace('%data%', work.jobs[job].dates);
 	$('.work-entry:last').append(formattedDates);
 
-	var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].location)
+	var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[job].location);
 	$('.work-entry:last').append(formattedLocation);
 
 	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
@@ -159,7 +158,7 @@ for (job in work.jobs){
 
 //Projects section
 projects.display = function() {
-	for (project in projects.projects) {
+	for (var project in projects.projects) {
 		$('#projects').append(HTMLprojectStart);
 
 		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].title);
@@ -178,11 +177,11 @@ projects.display = function() {
 			}
 		}
 	}
-}
+};
 
 //Education section
 function displayEducation() {
-	for (school in education.schools) {
+	for (var school in education.schools) {
 		$('#education').append(HTMLschoolStart);
 
 		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
@@ -204,7 +203,7 @@ function displayEducation() {
 
 function displayOnlineCourse() {
 		$('#education').append(HTMLonlineClasses);
-	for (onlineCourse in education.onlineCourses) {
+	for (var onlineCourse in education.onlineCourses) {
 		$('#education').append(HTMLschoolStart);
 
 		var formattedTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[onlineCourse].title);
@@ -238,7 +237,7 @@ $(document).click(function(loc){
 function locationizer(work_obj) {
 	var locationArray = [];
 
-	for (job in work_obj.jobs) {
+	for (var job in work_obj.jobs) {
 		var newLocation = work_obj.jobs[job].location;
 		locationArray.push(newLocation);
 	}
