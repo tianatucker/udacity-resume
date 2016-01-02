@@ -31,13 +31,13 @@ var projects = {
 			'title': 'Portfolio',
 			'dates': 'November 2015',
 			'description': 'Cupcake ipsum dolor. Sit amet powder jujubes sweet roll gummies. Donut topping cotton candy.',
-			'images': ''
+			'images': ['images/fry.jpg']
 		},
 		{
 			'title': 'Online Resume',
 			'dates': 'December 2015',
 			'description': 'Cupcake ipsum dolor. Sit amet powder jujubes sweet roll gummies. Donut topping cotton candy.',
-			'images': ''
+			'images': ['http://placehold.it/150x150','http://placehold.it/150x150']
 		}
 	]
 };
@@ -58,7 +58,7 @@ var bio = {
 	 	'wireframing',
 	 	'prototyping'
 	],
-	'bioPic': 'images/Tiana_web_circle.jpeg'
+	'biopic': 'images/Tiana_web_circle.jpeg'
 };
 
 var education = {
@@ -68,28 +68,30 @@ var education = {
 			'location': 'Elon, NC',
 			'degree': 'Bachelor of Arts',
 			'major': 'Communication Science',
-			'dates': 'August 2007 - May 2011'
+			'date': 'August 2007 - May 2011',
+			'url': 'http://www.elon.edu'
 		},
 		{
 			'name': 'General Assembly',
 			'location': 'Washington, DC',
 			'degree': '',
 			'major': 'User Experience Design Immersive',
-			'dates': 'June 2014 - August 2014'
+			'date': 'June 2014 - August 2014'
+			'url': 'https://generalassemb.ly/education/user-experience-design-immersive'
 		}
 	],
 	'onlineCourses': [
 		{
 			'title': 'Front-End Web Developer Nanodegree',
 			'school': 'Udacity',
-			'dates': 'October 2015 - Present',
+			'date': 'October 2015 - Present',
 			'url': 'https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001'
 		},
 	]
 };
 
 //Bio in the header
-function displayBio() {
+bio.display = function() {
 	var formattedRole =	HTMLheaderRole.replace('%data%', bio.role);
 	$('#header').prepend(formattedRole);
 
@@ -111,7 +113,7 @@ function displayBio() {
 	var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
 	$('#topContacts').append(formattedLocation);
 
-	var formattedBiopic = HTMLbioPic.replace('%data%', bio.bioPic);
+	var formattedBiopic = HTMLbioPic.replace('%data%', bio.biopic);
 	$('#header').append(formattedBiopic);
 
 	var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
@@ -120,6 +122,7 @@ function displayBio() {
 	$('#header').append(HTMLskillsStart);
 
 	if (bio.skills.length > 0) {
+		var formmatedSkills = HTMLskills.replace("%data%", bio.skills[skill])
 			$("#header").append(HTMLskillsStart);
 			for (var skill in bio.skills) {
 				formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
@@ -136,8 +139,8 @@ function displayBio() {
 }
 
 //Work Experience section
-function displayWork () {
-for (var job in work.jobs)
+work.display = function() {
+array.forEach(function(job){
 if (work.jobs.hasOwnProperty(job))  {
 	$('#workExperience').append(HTMLworkStart);
 
@@ -155,6 +158,7 @@ if (work.jobs.hasOwnProperty(job))  {
 	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
 	$('.work-entry:last').append(formattedDescription);
 	}
+})
 }
 
 //Projects section
@@ -172,17 +176,20 @@ projects.display = function() {
 		var formattedDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
 		$('.project-entry:last').append(formattedDescription);
 
-		if (projects.projects[project].images.length > 0) {
-			for (var image in projects.projects[project].images){
-				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
+		var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
+   		$(".project-entry:last").append(formattedProjectImage);
+
+		/*if (projects.projects[project].images.length > 0) {
+			for (var image_object in projects.projects[project].images){
+				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image_object]);
 				$('.project-entry:last').append(formattedImage);
 			}
-		}
+		}*/
 	}
-};
+}
 
 //Education section
-function displayEducation() {
+education.display = function() {
 	for (var school in education.schools)
   if (education.schools.hasOwnProperty(school)) {
 		$('#education').append(HTMLschoolStart);
@@ -195,16 +202,18 @@ function displayEducation() {
 		var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
 		$('.education-entry:last').append(formattedLocation);
 
-		var formattedDates = HTMLschoolDates.replace('%data%', education.schools[school].dates);
+		var formattedDates = HTMLschoolDates.replace('%data%', education.schools[school].date);
 		$('.education-entry:last').append(formattedDates);
 
 		var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].major);
 		$('.education-entry:last').append(formattedMajor);
 
+		var formattedURL = HTMLschoolURL.replace('%data%', education.schools[school].url);
+		$('.education-entry:last').append(formattedURL);
 	}
 }
 
-function displayOnlineCourse() {
+onlineCourse.display = function() {
 		$('#education').append(HTMLonlineClasses);
 	for (var onlineCourse in education.onlineCourses)
   if (education.onlineCourses.hasOwnProperty(onlineCourse)){
@@ -215,7 +224,7 @@ function displayOnlineCourse() {
 		var formattedTitleSchool = formattedTitle + formattedSchool;
 		$('.education-entry:last').append(formattedTitleSchool);
 
-		var formattedDates = HTMLonlineDates.replace('%data%', education.onlineCourses[onlineCourse].dates);
+		var formattedDates = HTMLonlineDates.replace('%data%', education.onlineCourses[onlineCourse].date);
 		$('.education-entry:last').append(formattedDates);
 
 		var formattedWebsite = HTMLonlineURL.replace('%data%', education.onlineCourses[onlineCourse].url);
@@ -223,11 +232,11 @@ function displayOnlineCourse() {
 	}
 }
 
-displayWork();
+work.display();
 projects.display();
-displayEducation();
-displayOnlineCourse();
-displayBio();
+education.display();
+onlineCourse.display();
+bio.display();
 
 //Page clicks recording
 $(document).click(function(loc){
