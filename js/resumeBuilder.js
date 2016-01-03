@@ -69,15 +69,15 @@ var education = {
 			'degree': 'Bachelor of Arts',
 			'major': 'Communication Science',
 			'date': 'August 2007 - May 2011',
-			'url': 'http://www.elon.edu'
+			'url': ['http://www.elon.edu']
 		},
 		{
 			'name': 'General Assembly',
 			'location': 'Washington, DC',
 			'degree': '',
 			'major': 'User Experience Design Immersive',
-			'date': 'June 2014 - August 2014'
-			'url': 'https://generalassemb.ly/education/user-experience-design-immersive'
+			'date': 'June 2014 - August 2014',
+			'url': ['https://generalassemb.ly/education/user-experience-design-immersive']
 		}
 	],
 	'onlineCourses': [
@@ -122,7 +122,7 @@ bio.display = function() {
 	$('#header').append(HTMLskillsStart);
 
 	if (bio.skills.length > 0) {
-		var formmatedSkills = HTMLskills.replace("%data%", bio.skills[skill])
+		var formatedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
 			$("#header").append(HTMLskillsStart);
 			for (var skill in bio.skills) {
 				formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
@@ -136,7 +136,7 @@ bio.display = function() {
 	$('#footerContacts').append(formattedTwitter);
 	$('#footerContacts').append(formattedLocation);
 
-}
+};
 
 //Work Experience section
 work.display = function() {
@@ -158,8 +158,8 @@ if (work.jobs.hasOwnProperty(job))  {
 	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
 	$('.work-entry:last').append(formattedDescription);
 	}
-})
-}
+});
+};
 
 //Projects section
 projects.display = function() {
@@ -186,7 +186,7 @@ projects.display = function() {
 			}
 		}*/
 	}
-}
+};
 
 //Education section
 education.display = function() {
@@ -211,11 +211,11 @@ education.display = function() {
 		var formattedURL = HTMLschoolURL.replace('%data%', education.schools[school].url);
 		$('.education-entry:last').append(formattedURL);
 	}
-}
+};
 
-onlineCourse.display = function() {
+/*onlineCourse.display = function() {
 		$('#education').append(HTMLonlineClasses);
-	for (var onlineCourse in education.onlineCourses)
+	for (var onlineCourse in education.onlineCourses)*/
   if (education.onlineCourses.hasOwnProperty(onlineCourse)){
 		$('#education').append(HTMLschoolStart);
 
@@ -230,12 +230,11 @@ onlineCourse.display = function() {
 		var formattedWebsite = HTMLonlineURL.replace('%data%', education.onlineCourses[onlineCourse].url);
 		$('.education-entry:last').append(formattedWebsite);
 	}
-}
+};
 
 work.display();
 projects.display();
 education.display();
-onlineCourse.display();
 bio.display();
 
 //Page clicks recording
