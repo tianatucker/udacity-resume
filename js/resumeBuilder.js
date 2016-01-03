@@ -181,7 +181,7 @@ projects.display = function() {
 
 
 //Education section
-function displayEducation() {
+education.display = function() {
 	for (var school in education.schools) {
 		$('#education').append(HTMLschoolStart);
 
@@ -202,9 +202,6 @@ function displayEducation() {
 		var formattedURL = HTMLschoolURL.replace('%data%', education.schools[school].url);
 		$('.education-entry:last').append(formattedURL);
 	}
-}
-
-function displayOnlineCourse() {
 		$('#education').append(HTMLonlineClasses);
 	for (var onlineCourse in education.onlineCourses) {
 		$('#education').append(HTMLschoolStart);
@@ -214,18 +211,17 @@ function displayOnlineCourse() {
 		var formattedTitleSchool = formattedTitle + formattedSchool;
 		$('.education-entry:last').append(formattedTitleSchool);
 
-		var formattedDates = HTMLonlineDates.replace('%data%', education.onlineCourses[onlineCourse].date);
-		$('.education-entry:last').append(formattedDates);
+		var formattedDate = HTMLonlineDates.replace('%data%', education.onlineCourses[onlineCourse].date);
+		$('.education-entry:last').append(formattedDate);
 
 		var formattedWebsite = HTMLonlineURL.replace('%data%', education.onlineCourses[onlineCourse].url);
 		$('.education-entry:last').append(formattedWebsite);
 	}
-}
+};
 
 work.display();
 projects.display();
-displayEducation();
-displayOnlineCourse();
+education.display();
 bio.display();
 
 //Page clicks recording
