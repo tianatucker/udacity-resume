@@ -67,17 +67,17 @@ var education = {
 			'name': 'Elon University',
 			'location': 'Elon, NC',
 			'degree': 'Bachelor of Arts',
-			'major': 'Communication Science',
-			'date': 'August 2007 - May 2011',
+			'majors': 'Communication Science',
+			'dates': 'August 2007 - May 2011',
 			'url': ['http://www.elon.edu']
 		},
 		{
 			'name': 'General Assembly',
 			'location': 'Washington, DC',
-			'degree': '',
-			'major': 'User Experience Design Immersive',
-			'date': 'June 2014 - August 2014',
-			'url': ['https://generalassemb.ly/education/user-experience-design-immersive']
+			'degree': 'N/A',
+			'majors': 'User Experience Design Immersive',
+			'dates': 'June 2014 - August 2014',
+			'url': ['https://generalassemb.ly/education/user-experience-design-immersive'],
 		}
 	],
 	'onlineCourses': [
@@ -140,7 +140,7 @@ bio.display = function() {
 
 //Work Experience section
 work.display = function() {
-array.forEach(function(job){
+work.jobs.forEach(function(job){
 if (work.jobs.hasOwnProperty(job))  {
 	$('#workExperience').append(HTMLworkStart);
 
@@ -163,7 +163,7 @@ if (work.jobs.hasOwnProperty(job))  {
 
 //Projects section
 projects.display = function() {
-	for (var project in projects.projects)
+	projects.projectsforEach(function(project){
   if (projects.projects.hasOwnProperty(project)){
 		$('#projects').append(HTMLprojectStart);
 
@@ -178,15 +178,8 @@ projects.display = function() {
 
 		var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
    		$(".project-entry:last").append(formattedProjectImage);
-
-		/*if (projects.projects[project].images.length > 0) {
-			for (var image_object in projects.projects[project].images){
-				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image_object]);
-				$('.project-entry:last').append(formattedImage);
-			}
-		}*/
-	}
-};
+  }
+});
 
 //Education section
 education.display = function() {
@@ -212,10 +205,6 @@ education.display = function() {
 		$('.education-entry:last').append(formattedURL);
 	}
 };
-
-/*onlineCourse.display = function() {
-		$('#education').append(HTMLonlineClasses);
-	for (var onlineCourse in education.onlineCourses)*/
   if (education.onlineCourses.hasOwnProperty(onlineCourse)){
 		$('#education').append(HTMLschoolStart);
 
